@@ -58,7 +58,7 @@ def harpy_encounter():
 def goblin_path_encounter(message):
   
   print('''\
-  \nMaking your way up the mountain,the path becomes more narrow. with rocks on one side and a long fall on the other, you near the top of the mountain. You hear goblins making their way down,with an injured arm you prepare yourself for battle.Stories are told of goblins raiding villages at night kidnapping children and women, you feel your heart thumping through your chest, sweat pouring down your face. There is no where to run.Two goblins turn the corner, one with a sword and shield, the other a spear. ''' + message)
+  \nMaking your way up the mountain,the path becomes more narrow. with rocks on one side and a long fall on the other, you near the top of the mountain. You hear goblins making their way down.Stories are told of goblins raiding villages at night kidnapping children and women, you feel your heart thumping through your chest, sweat pouring down your face. There is no where to run.Two goblins turn the corner, one with a sword and shield, the other a spear. ''' + message)
 
 def starting_up_the_mountain(num):
   print('''\
