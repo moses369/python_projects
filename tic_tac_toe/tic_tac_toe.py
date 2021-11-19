@@ -14,9 +14,8 @@ class Board:
     ]
   
   def draw_board(self):
-    print(self.board)
-     
-      
+    for row in self.board:
+      print(row)
   
   def choose_random_player(self):
     return random.randint(0,1)
@@ -28,7 +27,11 @@ class Board:
           return False
     return True
 
-
+  def clear_board(self):
+    le = len(self.board)
+    for row in range(le):
+      for col in range(le):
+        self.board[row][col] = '_'
 
 class TicTacToe(Board):
   def __init__(self,col = 3,row = 3):
@@ -36,21 +39,30 @@ class TicTacToe(Board):
     ]
 
   def assign_player(self):
-    if self.choose_random_player() == 1:
-      self.player = 'x'
-    elif self.choose_random_player() == 0:
-      self.player = 'o'
+    self.player = self.choose_random_player() 
+    self.player = 'x'
   
   def next_player(self):
-    if self.player == 'x':
+    if self.player.strip() =='x':
       self.player = 'o'
-    if self.player == 'o':
+    else:
       self.player = 'x'
 
+
   def select_spot(self):
-    row = int(input('Please choose your next move, row number 1, 2, or 3:  \n')) - 1
-    col = int(input('Please choose your next move, column number 1, 2, or 3:  \n')) - 1
-    self.board[row][col] = self.player
+    try:
+      row,col =  [int(x) - 1 for x in input( f'{self.player} turn! Type the row number followed by a space and then column number to move.  ').split() ]
+    except ValueError:
+      print('Please enter your spot with a space seperating the row and column, example(1 1) is row 1 column 1.')
+      self.select_spot()
+    else:
+    
+      if self.board [row][col] == 'x' and self.player == 'o' or self.board [row][col] == 'o' and self.player == 'x' :
+        print('That spot is already taken, please choose another.')
+        self.select_spot()
+      else:  
+        self.board[row][col] = self.player
+      
 
   def winner(self):
     win = None 
@@ -105,12 +117,14 @@ class TicTacToe(Board):
       elif self.is_board_filled() == True:
         print('DRAW!')
         break
+      self.next_player()
     rematch = input('Do you want to play again? \nEnter Yes or No \n')
     if rematch.strip().lower() == 'yes':
+      self.clear_board()
       return self.start()
     else: 
       return exit()
-   
+
       
 
 TicTacToe().start()
